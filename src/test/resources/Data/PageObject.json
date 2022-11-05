@@ -1,0 +1,34 @@
+{
+  "login" : {
+    "emailAddress ": {
+      "accessType" : "xpath",
+      "accessName" : "//input[@name='email']"
+    },
+    "password ": {
+      "accessType" : "xpath",
+      "accessName" : "//input[@name='password']"
+    },
+    "loginButton ": {
+      "accessType" : "xpath",
+      "accessName" : "//input[@value='Login']"
+    }
+  },
+  "homePage": {
+    "myAccount": {
+      "accessType" : "xpath",
+      "accessName" : "//span[text()='My Account']"
+    },
+    "login": {
+      "accessType" : "xpath",
+      "accessName" : "//a[text()='Login']"
+    },
+    "yourStore": {
+      "accessType" : "xpath",
+      "accessName" : "//a[text()='Your Store']"
+    },
+    "feature": {
+      "accessType" : "xpath",
+      "accessName" : "//h3[text()='Featured']/following-sibling::div"
+    }
+  }
+}
