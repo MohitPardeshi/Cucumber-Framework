@@ -1,14 +1,14 @@
 {
   "login" : {
-    "emailAddress ": {
+    "emailAddress": {
       "accessType" : "xpath",
       "accessName" : "//input[@name='email']"
     },
-    "password ": {
+    "password": {
       "accessType" : "xpath",
       "accessName" : "//input[@name='password']"
     },
-    "loginButton ": {
+    "loginButton": {
       "accessType" : "xpath",
       "accessName" : "//input[@value='Login']"
     }
