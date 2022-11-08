@@ -1,9 +1,11 @@
 package stepDefinations;
 
+import customeExceptions.InvalidDataException;
 import driverFactory.DriverUtil;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -11,6 +13,7 @@ import util.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedHashMap;
 
 public class ReusableStepDefinations {
     WebDriver driver;
@@ -46,4 +49,15 @@ public class ReusableStepDefinations {
         ele.click();
     }
 
+    @When("^I fill (.+) data from (.+) onto the page$")
+    public void i_fill_data_from_onto_the_page(String key,String pageName) throws InvalidDataException {
+        TestDataHandler.fillTestData(key,pageName);
+    }
+
+    @Given("^I land on (.+)$")
+    public void i_land_on(String pageName) {
+        String expectedTitle=TestDataHandler.getStoredTitle(pageName);
+        String actualTitle=DriverUtil.getDriver().getTitle();
+        Assert.assertEquals(actualTitle,expectedTitle);
+    }
 }

@@ -1,0 +1,13 @@
+{
+  "TITLE": "Account Login",
+  "QA_TEST": {
+    "emailAddress": "sctqatest@grr.la",
+    "password": "Spring123$",
+    "loginButton": "click"
+  },
+  "DUMMY_TEST": {
+    "emailAddress": "dummy@gmail.com",
+    "password": "password",
+    "loginButton": "click"
+  }
+}

@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import util.ExplicitWait;
 import util.GlobalConfigProperties;
 import util.PageObjectGenerator;
+import util.TestDataHandler;
 
 import java.io.IOException;
 
@@ -28,10 +29,13 @@ public class Hooks {
         driver=driverUtil.initializeDriver(browserName);
         //initiate the Explicit wait
         initializeWait();
+        //initiating the Test Data map
+        TestDataHandler.initiateTestDataMap();
     }
 
     @After
     public void tearDown(){
-       // driver.quit();
+      //  driver.close();
+      //  driver.quit();
     }
 }
