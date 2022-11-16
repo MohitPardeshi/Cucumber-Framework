@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Properties;
 
 public class GlobalConfigProperties {
-    public static GlobalConfigProperties globalConfigProperties;
+    private static GlobalConfigProperties globalConfigProperties;
     private static LinkedHashMap<String,String> properties;
 
     private GlobalConfigProperties(String path) throws IOException {
@@ -22,7 +22,7 @@ public class GlobalConfigProperties {
         }
     }
 
-    public String getProperty(String key){
+    public static String getProperty(String key){
         if(properties.containsKey(key)){
             return properties.get(key);
         }else {

@@ -8,6 +8,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -108,6 +109,9 @@ public class TestDataHandler {
             case "button":
                 element.click();
                 break;
+            case "select" :
+                Select select=new Select(element);
+                select.selectByValue(dataValue);
             default:
                 element.click();
         }

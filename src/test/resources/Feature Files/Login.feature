@@ -14,10 +14,12 @@ Feature: Login to the application
   Scenario: Login through Test Data
     Given I navigate to TutorialNinja
     And I land on homePage
+    And I take screenshot
     When I fill NAVIGATE_TO_LOGIN data from homePage onto the page
     And I land on login
     And I fill QA_TEST data from login onto the page
     And I land on MyAccount
+    And I take screenshot
 
   @Parameterized
  Scenario Outline: Login through Test Data

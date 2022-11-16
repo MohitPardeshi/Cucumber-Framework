@@ -2,6 +2,7 @@ package stepDefinations;
 
 import customeExceptions.InvalidDataException;
 import driverFactory.DriverUtil;
+import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -16,6 +17,11 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 
 public class ReusableStepDefinations {
+    public static Scenario scenario;
+    @Before
+    public void before(Scenario scenario){
+       this.scenario=scenario;
+    }
     WebDriver driver;
 
     @Given("^I navigate to (.+)$")
@@ -28,8 +34,8 @@ public class ReusableStepDefinations {
 
     @Then("^I take screenshot$")
     public void i_take_screenshot() {
-       File src=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-
+       byte[] bytes=((TakesScreenshot)DriverUtil.getDriver()).getScreenshotAs(OutputType.BYTES);
+       scenario.attach(bytes,"image/png","Image");
     }
 
     @Then("^I enter (.+) into (.+)$")
@@ -60,4 +66,5 @@ public class ReusableStepDefinations {
         String actualTitle=DriverUtil.getDriver().getTitle();
         Assert.assertEquals(actualTitle,expectedTitle);
     }
+
 }

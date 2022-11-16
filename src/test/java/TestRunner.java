@@ -6,7 +6,7 @@ import io.cucumber.testng.CucumberOptions;
         features = "src/test/resources/Feature Files",
         glue={"stepDefinations","hooks"},
         //dryRun = true,
-        plugin = {"pretty", "rerun:target/rerun.txt"}
+        plugin = {"pretty","html:target/reports/cucumberHtmlReports.html", "rerun:target/rerun.txt"}
 )
 public class TestRunner extends AbstractTestNGCucumberTests {
 

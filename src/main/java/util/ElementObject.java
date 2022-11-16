@@ -8,6 +8,11 @@ public class ElementObject {
     private String accessType;
     private String accessName;
 
+    {
+        this.element=null;
+        this.accessType=null;
+        this.accessName=null;
+    }
     /**
      * Setting the Object from the Tree Map
      * @param element

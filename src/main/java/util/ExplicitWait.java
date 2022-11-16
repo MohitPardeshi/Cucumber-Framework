@@ -9,7 +9,7 @@ public class ExplicitWait {
     static WebDriverWait wait;
 
     public static void initializeWait(){
-        String waitTime=GlobalConfigProperties.globalConfigProperties.getProperty("explicit_wait_timeout");
+        String waitTime= String.valueOf(GlobalConfigProperties.getProperty("explicit_wait_timeout"));
         wait=new WebDriverWait(DriverUtil.getDriver(), Duration.ofSeconds(Long.parseLong(waitTime)));
     }
 

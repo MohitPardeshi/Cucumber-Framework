@@ -8,6 +8,7 @@ public class Constants {
     public static final String DATA=RESOURCES+FILE_SEPARATOR+"Data";
     public static final String PAGE_OBJECT=DATA+FILE_SEPARATOR+"PageObject.json";
     public static final String INPUT_DATA=DATA+FILE_SEPARATOR+"Input Data";
+    public static final String DBDETAILS=RESOURCES+FILE_SEPARATOR+"DBDetails.yml";
 
 
 }
