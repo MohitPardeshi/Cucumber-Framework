@@ -1,9 +1,12 @@
 package stepDefinations;
 
+import customeExceptions.InvalidDataException;
 import driverFactory.DriverUtil;
+import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -11,8 +14,14 @@ import util.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedHashMap;
 
 public class ReusableStepDefinations {
+    public static Scenario scenario;
+    @Before
+    public void before(Scenario scenario){
+       this.scenario=scenario;
+    }
     WebDriver driver;
 
     @Given("^I navigate to (.+)$")
@@ -25,8 +34,8 @@ public class ReusableStepDefinations {
 
     @Then("^I take screenshot$")
     public void i_take_screenshot() {
-       File src=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-
+       byte[] bytes=((TakesScreenshot)DriverUtil.getDriver()).getScreenshotAs(OutputType.BYTES);
+       scenario.attach(bytes,"image/png","Image");
     }
 
     @Then("^I enter (.+) into (.+)$")
@@ -44,6 +53,18 @@ public class ReusableStepDefinations {
         By by= GetElementBy.getElementBy(elementObject.getAccessType(),elementObject.getAccessName());
         WebElement ele= ExplicitWait.getWait().until(ExpectedConditions.elementToBeClickable(by));
         ele.click();
+    }
+
+    @When("^I fill (.+) data from (.+) onto the page$")
+    public void i_fill_data_from_onto_the_page(String key,String pageName) throws InvalidDataException {
+        TestDataHandler.fillTestData(key,pageName);
+    }
+
+    @Given("^I land on (.+)$")
+    public void i_land_on(String pageName) {
+        String expectedTitle=TestDataHandler.getStoredTitle(pageName);
+        String actualTitle=DriverUtil.getDriver().getTitle();
+        Assert.assertEquals(actualTitle,expectedTitle);
     }
 
 }

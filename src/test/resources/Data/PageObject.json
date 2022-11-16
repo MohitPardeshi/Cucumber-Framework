@@ -1,5 +1,5 @@
 {
-  "login" : {
+  "Login" : {
     "emailAddress": {
       "accessType" : "xpath",
       "accessName" : "//input[@name='email']"
@@ -13,7 +13,7 @@
       "accessName" : "//input[@value='Login']"
     }
   },
-  "homePage": {
+  "HomePage": {
     "myAccount": {
       "accessType" : "xpath",
       "accessName" : "//span[text()='My Account']"

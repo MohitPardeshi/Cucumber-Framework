@@ -1,0 +1,7 @@
+{
+  "TITLE": "Your Store",
+  "NAVIGATE_TO_LOGIN" : {
+    "myAccount": "click",
+    "login": "click"
+  }
+}

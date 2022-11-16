@@ -4,6 +4,9 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import util.GlobalConfigProperties;
+
+import java.time.Duration;
 
 public class DriverUtil {
     public WebDriver driver;
@@ -36,6 +39,8 @@ public class DriverUtil {
         }
         getDriver().manage().deleteAllCookies();
         getDriver().manage().window().maximize();
+        getDriver().manage().timeouts().implicitlyWait(
+                Duration.ofSeconds(Long.parseLong(GlobalConfigProperties.getProperty("implicit_timeout"))));
         return getDriver();
     }
 

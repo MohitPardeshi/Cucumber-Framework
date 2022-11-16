@@ -1,6 +1,9 @@
 package util;
 
+import driverFactory.DriverUtil;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class GetElementBy {
 
@@ -35,4 +38,29 @@ public class GetElementBy {
         return by;
     }
 
+    public static String getElementType(WebElement element){
+        String tagName=element.getTagName();
+        System.out.println(tagName);
+        switch (tagName){
+            case "input":
+                String elementType=element.getAttribute("type");
+                return getElementInputType(elementType);
+        }
+        return tagName;
+    }
+
+    private static String getElementInputType(String elementType) {
+        switch (elementType){
+            case "text" :
+            case "password" :
+                return "text";
+            case "submit": return "button";
+            default:
+                return "button";
+        }
+    }
+
+    public static WebElement getElement(By by){
+       return DriverUtil.getDriver().findElement(by);
+    }
 }

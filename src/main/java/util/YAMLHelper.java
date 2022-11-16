@@ -12,8 +12,8 @@ public class YAMLHelper {
     public static LinkedHashMap<String, String> readYML(String path) throws IOException {
         FileInputStream fileInputStream=new FileInputStream(path);
         ObjectMapper objectMapper=new ObjectMapper(new YAMLFactory());
-        LinkedHashMap<String, String> urls=objectMapper.readValue(fileInputStream,LinkedHashMap.class);
-        return urls;
+        LinkedHashMap<String, String> data=objectMapper.readValue(fileInputStream,LinkedHashMap.class);
+        return data;
     }
 
 }
