@@ -1,10 +1,9 @@
 package util;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.LinkedHashMap;
+import java.util.TreeMap;
 
 public class ConnectDB {
     private static Connection connection=null;
@@ -26,5 +25,28 @@ public class ConnectDB {
 
     public static void closeConnection() throws SQLException {
         connection.close();
+    }
+
+    public static TreeMap<String,Object> readPageObjectFromDB() throws SQLException {
+        TreeMap<String,Object> pageObject= new TreeMap<>();
+        String query="select * from pageObject;";
+        Statement stmt=connection.createStatement();
+        ResultSet resultSet=stmt.executeQuery(query);
+        while (resultSet.next()){
+            String pageName=resultSet.getString(1);
+            String elementName=resultSet.getString(2);
+            String accessName=resultSet.getString(3);
+            String accessType=resultSet.getString(4);
+            LinkedHashMap<String,String> tempMap=new LinkedHashMap<>();
+            tempMap.put("accessName",accessName);
+            tempMap.put("accessType",accessType);
+            LinkedHashMap<String,Object> elementTemp=new LinkedHashMap<>();
+            elementTemp.put(elementName,tempMap);
+            if(pageObject.containsKey(pageName)) {
+
+            }else
+                pageObject.put(pageName, elementTemp);
+        }
+        return pageObject;
     }
 }

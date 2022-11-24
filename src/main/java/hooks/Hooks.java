@@ -16,7 +16,6 @@ public class Hooks {
     private WebDriver driver;
     @Before()
     public void setUpHook() throws IOException, SQLException {
-        ConnectDB.getConnection();
         System.out.println("Inside Before Hook");
         //Load property files
         GlobalConfigProperties.loadProperties();
@@ -38,6 +37,5 @@ public class Hooks {
       //  driver.close();
       //  driver.quit();
       //Closing the DB Connections
-      ConnectDB.closeConnection();
     }
 }
