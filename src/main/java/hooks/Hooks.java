@@ -35,7 +35,7 @@ public class Hooks {
     @After
     public void tearDown() throws SQLException {
       //  driver.close();
-      //  driver.quit();
+        driver.quit();
       //Closing the DB Connections
     }
 }

@@ -2,6 +2,7 @@ package stepDefinations;
 
 import customeExceptions.InvalidDataException;
 import driverFactory.DriverUtil;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
@@ -15,7 +16,10 @@ import org.testng.asserts.SoftAssert;
 import util.*;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class ReusableStepDefinations {
@@ -97,4 +101,36 @@ public class ReusableStepDefinations {
        softAssert.assertAll();
     }
 
+    @Given("I verify below fields have correct place holders")
+    public void i_verify_below_fields_have_correct_place_holders(DataTable dataTable) {
+        SoftAssert softAssert=new SoftAssert();
+        Map<String,String> map=dataTable.asMap(String.class,String.class);
+        for(Map.Entry entry: map.entrySet()){
+           // System.out.println(entry.getKey());
+            ElementObject elementObject=new ElementObject((String) entry.getKey());
+            By by= GetElementBy.getElementBy(elementObject.getAccessType(),elementObject.getAccessName());
+            WebElement ele= ExplicitWait.getWait().until(ExpectedConditions.elementToBeClickable(by));
+            String actual=ele.getAttribute("placeholder");
+           // System.out.println(entry.getValue());
+            String expected= (String) entry.getValue();
+            softAssert.assertEquals(actual,expected);
+        }
+        softAssert.assertAll();
+    }
+
+    @Then("I verify all links")
+    public void i_verify_all_links() throws IOException {
+        SoftAssert softAssert=new SoftAssert();
+        List<WebElement> list=DriverUtil.getDriver().findElements(By.tagName("a"));
+        for(WebElement e: list){
+            String url=e.getAttribute("href");
+            HttpURLConnection connection= (HttpURLConnection) new URL(url).openConnection();
+            connection.setRequestMethod("HEAD");
+            connection.connect();
+            int responseCode=connection.getResponseCode();
+           // System.out.println(e.getText()+" This Links status code is "+responseCode);
+            softAssert.assertTrue(responseCode<400,e.getText()+" This Links is broken");
+        }
+        softAssert.assertAll();
+    }
 }

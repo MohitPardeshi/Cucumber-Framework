@@ -29,6 +29,10 @@
     "feature": {
       "accessType" : "xpath",
       "accessName" : "//h3[text()='Featured']/following-sibling::div"
+    },
+    "search": {
+      "accessType" : "xpath",
+      "accessName" : "//input[@name='search']"
     }
   }
 }

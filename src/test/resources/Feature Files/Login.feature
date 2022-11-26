@@ -39,3 +39,21 @@ Feature: Login to the application
     Given I navigate to TutorialNinja
     And I land on homePage
     And I click on all links
+
+  @CorrectPlaceHolder
+  Scenario: Login through Test Data
+    Given I navigate to TutorialNinja
+    And I land on homePage
+    And I verify below fields have correct place holders
+      |homePage.search|Search|
+    When I fill NAVIGATE_TO_LOGIN data from homePage onto the page
+    And I land on login
+    And I verify below fields have correct place holders
+    |login.emailAddress|E-Mail Address|
+    |login.password    |Password|
+
+  @BrokenLinksOfPages
+  Scenario: Login through Test Data
+    Given I navigate to TutorialNinja
+    When I land on homePage
+    Then I verify all links
