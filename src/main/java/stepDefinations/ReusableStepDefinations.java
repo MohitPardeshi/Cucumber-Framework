@@ -70,6 +70,7 @@ public class ReusableStepDefinations {
     public void i_land_on(String pageName) {
         String expectedTitle=TestDataHandler.getStoredTitle(pageName);
         String actualTitle=DriverUtil.getDriver().getTitle();
+        //Assert.assertTrue(false);
         Assert.assertEquals(actualTitle,expectedTitle);
     }
 
@@ -132,5 +133,20 @@ public class ReusableStepDefinations {
             softAssert.assertTrue(responseCode<400,e.getText()+" This Links is broken");
         }
         softAssert.assertAll();
+    }
+
+    @Then("I navigate back")
+    public void i_navigate_back() {
+        Navigation.navigateBack();
+    }
+
+    @Then("I navigate forward")
+    public void i_navigate_forward() {
+        Navigation.navigateForward();
+    }
+
+    @Then("I refresh page")
+    public void i_refresh_page() {
+        Navigation.navigateRefresh();
     }
 }

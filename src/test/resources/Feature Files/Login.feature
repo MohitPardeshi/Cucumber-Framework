@@ -57,3 +57,12 @@ Feature: Login to the application
     Given I navigate to TutorialNinja
     When I land on homePage
     Then I verify all links
+
+  @Navigation
+  Scenario: Login through Test Data
+    Given I navigate to TutorialNinja
+    When I land on homePage
+    And I fill NAVIGATE_TO_LOGIN data from homePage onto the page
+    Then I navigate back
+    And I navigate forward
+    And I refresh page

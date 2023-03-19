@@ -3,6 +3,7 @@ package driverFactory;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.safari.SafariDriver;
 import util.GlobalConfigProperties;
 
@@ -27,7 +28,7 @@ public class DriverUtil {
         switch(browser){
             case "chrome":
                 WebDriverManager.chromedriver().setup();
-                driverThreadLocal.set(new ChromeDriver());
+                driverThreadLocal.set(getChromeDriver());
                 break;
             case "safari":
                 driverThreadLocal.set(new SafariDriver());
@@ -50,5 +51,16 @@ public class DriverUtil {
      */
     public static synchronized WebDriver getDriver(){
         return driverThreadLocal.get();
+    }
+
+    public static ChromeDriver getChromeDriver() {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--start-maximized");
+        chromeOptions.addArguments("--remote-allow-origins=*");
+        return new ChromeDriver(chromeOptions);
+    }
+
+    public static void closeBrowser(){
+        driverThreadLocal.get().quit();
     }
 }
