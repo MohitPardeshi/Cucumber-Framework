@@ -1,6 +1,7 @@
 package util;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -8,9 +9,15 @@ import java.util.TreeMap;
 public class PageObjectGenerator {
     public static TreeMap<String, Object> pageObject=null;
 
-    public static void initialize() throws IOException {
-        String pageObjectPath=Constants.PAGE_OBJECT;
-        pageObject=JSONHelper.readJSON(pageObjectPath);
+    public static void initialize() throws IOException, SQLException {
+        switch (GlobalConfigProperties.getProperty("inputData")) {
+            case "json" : String pageObjectPath = Constants.PAGE_OBJECT;
+            pageObject = JSONHelper.readJSON(pageObjectPath);
+            break;
+            case "db":
+                ConnectDB.getConnection();
+                pageObject=ConnectDB.readPageObjectFromDB();
+        }
         System.out.println(pageObject);
     }
 
